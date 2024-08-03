@@ -1,0 +1,68 @@
+.backdrop{
+    position:fixed;
+    top:0;
+    left: 0;
+    width: auto;
+    height: auto;
+    z-index: 20;
+    background-color: black;
+    }
+    
+    .modal{
+    position:absolute;
+    top: 20vh;
+    
+    width:auto;
+    background-color: aliceblue;
+    padding: 1rem;
+    box-shadow: none;
+    z-index: 40;
+    }
+    
+    @media (min-width:768px)  {
+        .modal{
+            width: 40rem;
+            left: 0%;
+        }
+    }
+    
+    .content{
+        max-height: 60vh;
+        overflow-y: auto;
+        padding: 1rem;
+    }
+    /* Modal.module.css */
+    .backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+        background-color: rgba(0, 0, 0, 0.75);
+      }
+      
+      .modal {
+        position: fixed;
+        top: 20vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        background-color: aliceblue;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+        z-index: 30;
+        
+      }
+      
+      @media (min-width: 768px) {
+        .modal {
+          width: 40rem;
+        }
+      }
+      
+      .content {
+        overflow-y: auto;
+        max-height: 70vh;
+      }
+      
