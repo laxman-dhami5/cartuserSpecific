@@ -1,11 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useContext } from 'react';
 import { Card, Col, Container, Row, Button, Form } from 'react-bootstrap';
+import Auth2Context from '../components/Store/auth2-context';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+
+  const ctx=useContext(Auth2Context)
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -42,7 +45,7 @@ const Auth = () => {
 
       const data = await response.json();
       if (response.ok) {
-        console.log(data);
+        ctx.login(data.idToken);
         // Handle successful authentication
       } else {
         let errorMessage = 'Authentication failed!';
