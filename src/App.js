@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import Cart from "./components/Cart";
 import AuthContext from "./components/Store/auth-context";
 import Header from "./components/Header";
@@ -8,12 +8,13 @@ import About from "./pages/About";
 import Products from "./components/Products";
 import ContactUs from "./pages/ContactUs";
 import ProductDetails from "./pages/ProductDetails";
-import { Redirect, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
+import Auth2Context from "./components/Store/auth2-context";
 
 const App = () => {
   const ctx = useContext(AuthContext);
+  const authCtx = useContext(Auth2Context);
 
   const formDataHandler = async (newData) => {
     const response = await fetch(
@@ -55,10 +56,15 @@ const App = () => {
             <ProductDetails />
           </Route>
           <Route path="/login">
-          <Auth/>
+            <Auth />
           </Route>
-          <Route path="/profile">
-              <Profile/>
+          {authCtx.isLoggedIn && (
+            <Route path="/profile">
+              <Profile />
+            </Route>
+          )}
+          <Route path="*">
+            <Redirect to="/" />
           </Route>
         </Switch>
       </main>

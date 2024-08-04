@@ -10,15 +10,18 @@ const Auth2Context = React.createContext({
 
 // Define the provider component
 export const Auth2ContextProvider = (props) => {
-  const [token, setToken] = useState(null);
+ const initialToken=localStorage.getItem('token')
+  const [token, setToken] = useState(initialToken);
 
   const userIsLoggedIn = !!token;
 
   const logInHandler = (token) => {
+    localStorage.setItem('token',token)
     setToken(token);
   };
 
   const logOutHandler = () => {
+    localStorage.removeItem('token')
     setToken(null);
   };
 
@@ -36,5 +39,5 @@ export const Auth2ContextProvider = (props) => {
   );
 };
 
-// Export context for use in components
+
 export default Auth2Context;

@@ -5,25 +5,30 @@ import { NavLink } from "react-router-dom";
 import AuthContext from "./Store/auth-context";
 import Cart from "./Cart";
 import Auth2Context from "./Store/auth2-context";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Header = () => {
   const cartCtx = useContext(AuthContext);
   const authCtx = useContext(Auth2Context);
+const history=useHistory()
+
   const isLoggedIn = authCtx.isLoggedIn;
 
   const logoutHandler=()=>{
 authCtx.logout()
+history.replace('/login')
+
   }
 
   return (
     <>
       <Navbar bg="dark" expand="lg" variant="dark" style={{ height: "50px" }}>
         <Container style={{ position: "relative" }}>
-          {isLoggedIn && (
+         
             <Navbar.Brand style={{ position: "absolute", left: "30%" }}>
               <NavLink to="/home">Home</NavLink>
             </Navbar.Brand>
-          )}
+          
           <Navbar.Brand style={{ position: "absolute", left: "40%" }}>
             <NavLink to="/store">Store</NavLink>
           </Navbar.Brand>
@@ -37,15 +42,15 @@ authCtx.logout()
             <NavLink to="/profile">Profile</NavLink>
           </Navbar.Brand>)}
           
-          {isLoggedIn ? (
-            <Navbar.Brand style={{ position: "absolute", left: "80%" }}>
-              <NavLink to="/logout" onClick={logoutHandler}>Logout</NavLink>
-            </Navbar.Brand>
-          ) : (
-            <Navbar.Brand style={{ position: "absolute", left: "80%" }}>
+          {isLoggedIn && (
+              <Button type="button" style={{ position: "absolute", left: "80%" }} to="/logout" onClick={logoutHandler}>Logout</Button>
+            )} 
+            
+          {!isLoggedIn && (<Navbar.Brand style={{ position: "absolute", left: "80%" }}>
               <NavLink to="/login">Login</NavLink>
-            </Navbar.Brand>
-          )}
+            </Navbar.Brand>)}
+            
+         
         </Container>
         <Button
           onClick={cartCtx.showCartHandler}
