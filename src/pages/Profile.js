@@ -1,11 +1,14 @@
 import React, { useContext, useRef } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import Auth2Context from "../components/Store/auth2-context";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const Profile = () => {
   const newPasswordRef=useRef()
   const ctx=useContext(Auth2Context)
+
+  const history=useHistory()
   const submitHandler=(event)=>{
   event.preventDefault()
 
@@ -23,7 +26,7 @@ const Profile = () => {
     }
   }).then((res)=>{
     if(res.ok){
-
+   history.replace('/home')
     }else{
       return res.json().then(data=>{
         console.log('Error',data.error.message)

@@ -11,6 +11,10 @@ const Header = () => {
   const authCtx = useContext(Auth2Context);
   const isLoggedIn = authCtx.isLoggedIn;
 
+  const logoutHandler=()=>{
+authCtx.logout()
+  }
+
   return (
     <>
       <Navbar bg="dark" expand="lg" variant="dark" style={{ height: "50px" }}>
@@ -29,12 +33,13 @@ const Header = () => {
           <Navbar.Brand style={{ position: "absolute", left: "60%" }}>
             <NavLink to="/contact-us">Contact Us</NavLink>
           </Navbar.Brand>
-          <Navbar.Brand style={{position:'absolute', left:'70%'}}>
+          {isLoggedIn && (<Navbar.Brand style={{position:'absolute', left:'70%'}}>
             <NavLink to="/profile">Profile</NavLink>
-          </Navbar.Brand>
+          </Navbar.Brand>)}
+          
           {isLoggedIn ? (
             <Navbar.Brand style={{ position: "absolute", left: "80%" }}>
-              <NavLink to="/logout">Logout</NavLink>
+              <NavLink to="/logout" onClick={logoutHandler}>Logout</NavLink>
             </Navbar.Brand>
           ) : (
             <Navbar.Brand style={{ position: "absolute", left: "80%" }}>

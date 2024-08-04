@@ -1,12 +1,14 @@
 import React, { useRef, useState,useContext } from 'react';
 import { Card, Col, Container, Row, Button, Form } from 'react-bootstrap';
 import Auth2Context from '../components/Store/auth2-context';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const history=useHistory()
 
   const ctx=useContext(Auth2Context)
 
@@ -46,6 +48,7 @@ const Auth = () => {
       const data = await response.json();
       if (response.ok) {
         ctx.login(data.idToken);
+        history.replace('/')
         // Handle successful authentication
       } else {
         let errorMessage = 'Authentication failed!';
