@@ -29,6 +29,9 @@ const Header = () => {
           <Navbar.Brand style={{ position: "absolute", left: "60%" }}>
             <NavLink to="/contact-us">Contact Us</NavLink>
           </Navbar.Brand>
+          <Navbar.Brand style={{position:'absolute', left:'70%'}}>
+            <NavLink to="/profile">Profile</NavLink>
+          </Navbar.Brand>
           {isLoggedIn ? (
             <Navbar.Brand style={{ position: "absolute", left: "80%" }}>
               <NavLink to="/logout">Logout</NavLink>

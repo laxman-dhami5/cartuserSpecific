@@ -10,6 +10,7 @@ import ContactUs from "./pages/ContactUs";
 import ProductDetails from "./pages/ProductDetails";
 import { Redirect, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Auth from "./pages/Auth";
+import Profile from "./pages/Profile";
 
 const App = () => {
   const ctx = useContext(AuthContext);
@@ -55,6 +56,9 @@ const App = () => {
           </Route>
           <Route path="/login">
           <Auth/>
+          </Route>
+          <Route path="/profile">
+              <Profile/>
           </Route>
         </Switch>
       </main>
