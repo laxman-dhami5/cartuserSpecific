@@ -48,8 +48,8 @@ const Auth = () => {
       const data = await response.json();
       if (response.ok) {
         ctx.login(data.idToken);
-        history.replace('/')
-        // Handle successful authentication
+        history.replace('/store')
+        
       } else {
         let errorMessage = 'Authentication failed!';
         if (data && data.error && data.error.message) {

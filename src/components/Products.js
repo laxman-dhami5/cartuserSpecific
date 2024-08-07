@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
 import Footer from "./Footer";
 import AuthContext from "./Store/auth-context";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import Auth2Context from "./Store/auth2-context";
 
 const productsArr = [
   {
@@ -33,6 +34,7 @@ const productsArr = [
 
 const Products = (props) => {
   const ctx = useContext(AuthContext);
+  const authCtx=useContext(Auth2Context)
   const addToCartHandler = (product) => {
     ctx.addItem({
       id: product.id,
@@ -42,6 +44,9 @@ const Products = (props) => {
       amount: 1,
     });
   };
+  if(!authCtx.isLoggedIn){
+    return <Redirect to="/login"/>
+  }
   return (
     <>
       <Container>

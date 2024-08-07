@@ -1,33 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-// Create the context with default values
 const Auth2Context = React.createContext({
   token: '',
   isLoggedIn: false,
+  email: '',
   login: (token) => {},
   logout: () => {}
 });
 
-// Define the provider component
 export const Auth2ContextProvider = (props) => {
- const initialToken=localStorage.getItem('token')
+  const initialToken = localStorage.getItem('token');
   const [token, setToken] = useState(initialToken);
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      setEmail(decodedToken.email);
+    } else {
+      setEmail('');
+    }
+  }, [token]);
 
   const userIsLoggedIn = !!token;
 
   const logInHandler = (token) => {
-    localStorage.setItem('token',token)
+    localStorage.setItem('token', token);
     setToken(token);
   };
 
   const logOutHandler = () => {
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
     setToken(null);
   };
 
   const contextValue = {
     token: token,
     isLoggedIn: userIsLoggedIn,
+    email: email,
     login: logInHandler,
     logout: logOutHandler
   };
@@ -38,6 +48,5 @@ export const Auth2ContextProvider = (props) => {
     </Auth2Context.Provider>
   );
 };
-
 
 export default Auth2Context;

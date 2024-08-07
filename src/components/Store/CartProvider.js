@@ -19,10 +19,10 @@ const CartProvider = (props) => {
     setItems((prevItems) => {
       const existingItemIndex = prevItems.findIndex((i) => i.id === item.id);
       if (existingItemIndex === -1) {
-        // Add the new item
+        
         return [...prevItems, item];
       } else {
-        // Update the existing item's amount
+       
         return prevItems.map((i) => {
           if (i.id === item.id) {
             return { ...i, amount: i.amount + item.amount };
